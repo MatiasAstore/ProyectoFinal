@@ -133,9 +133,9 @@ def quiniela_tradicional():
 
     nombre_archivo = "quiniela_tradicional.txt" #se almacena en una variable el nombre del fichero donde se almacenaran las apuestas de la quiniela
     
-    crear_ticket(dni, dinero_apostado, fecha_hora, numero_comprobante, numero_apuesta) #se llama a la funcion "crear_ticket" para crear el ticket con la informacion de la apuesta y mostrarlo en consola. 
-
     almacenar(nombre_archivo, dni, dinero_apostado, fecha_hora, numero_comprobante, numero_apuesta) #se llama a la funcion "almacenar" para almacenar la informacion de la apuesta
+    
+    crear_ticket(dni, dinero_apostado, fecha_hora, numero_comprobante, numero_apuesta) #se llama a la funcion "crear_ticket" para crear el ticket con la informacion de la apuesta y mostrarlo en consola. 
     
 #Esta funcion permite al usuario verificar si gano la quiniela o el quini 6 ingresando el numero ganador
 def comprobar_ganador(): 
@@ -154,19 +154,21 @@ def comprobar_ganador():
         cantidad_cifras = len(conversion_numero) #se determina la longitud del numero ganador
         while (cantidad_cifras < 2) or (cantidad_cifras > 4): #se crea un bucle while que se ejecutara siempre que la cantidad de cifras del numero ganador sean menores a 2 o mayores a 4
             print("El numero ganador ingresado no es valido") #si el numero es menor a 2 o mayor a 4 se muestre este mensaje
-            numero_ganador = int(int(input("Ingrese nuevamente el numero ganador: "))) #se indica al usuario que ingre un nuevo numero 
+            numero_ganador = int(input("Ingrese nuevamente el numero ganador: ")) #se indica al usuario que ingre un nuevo numero 
         
         nombre_archivo = "quiniela.txt" #se almacena el nombre del fichero donde se almacenan las apuestas de la quiniela
-    
-        obtener_ganadores = comprobar_apuesta(numero_ganador, cargar(nombre_archivo)) #se llama a la funcion "comprobar_apuesta" y se le pasa como parametro el numero ganador y la funcion "cargar()" junto con el nombre del archivo indicado para obtener las apuestas de la quiniela almacenadas en el fichero "quiniela". El resultado de llamar a la funcion "comprobar_apuesta" se almacena en una lista "obtener_ganadores" que poseera la/las apuesta/as ganadora/as. 
 
-        if not obtener_ganadores: #si no se encontraron apuestas ganadoras, es decir que "obtener_ganadores" esta vacio, se presenta el siguiente mensaje. 
-            print("No se encontro ningun ganador")
-        else: #si se encontraron ganadores se itera en la lista "obtener_ganadores" y se muestra cada ganador en consola. 
-            print("El/los ganadores son:")
-            for ganador in obtener_ganadores:
-                print(ganador)
-                
+        try:
+            obtener_ganadores = comprobar_apuesta(numero_ganador, cargar(nombre_archivo)) #se llama a la funcion "comprobar_apuesta" y se le pasa como parametro el numero ganador y la funcion "cargar()" junto con el nombre del archivo indicado para obtener las apuestas de la quiniela almacenadas en el fichero "quiniela". El resultado de llamar a la funcion "comprobar_apuesta" se almacena en una lista "obtener_ganadores" que poseera la/las apuesta/as ganadora/as. 
+
+            if not obtener_ganadores: #si no se encontraron apuestas ganadoras, es decir que "obtener_ganadores" esta vacio, se presenta el siguiente mensaje. 
+                print("No se encontro ningun ganador")
+            else: #si se encontraron ganadores se itera en la lista "obtener_ganadores" y se muestra cada ganador en consola. 
+                print("El/los ganadores son:")
+                for ganador in obtener_ganadores:
+                    print(f"Fecha y hora: {ganador['fecha_hora']}, Comprobante: {ganador['numero_comprobante']}, DNI: {ganador['dni']}, Cifra apostada: ${ganador['cantidad_dinero']}, Numero apostado: {ganador['numero_apostado']}")
+        except FileNotFoundError:
+            print("No se han encontrado apuestas")
     elif(opcion == 2): #si la opcion es 2 indica al usuario que ingrese el numero ganador
         numero_ganador = int(input("Ingrese el numero ganador: "))
         conversion_numero = str(numero_ganador) #se convierte el numero ganador a cadena, esto para determinar la cantidad de digitos que posee
@@ -176,16 +178,18 @@ def comprobar_ganador():
             numero_ganador = int(int(input("Ingrese nuevamente el numero ganador: "))) #se pide al usuario que ingrese un numero nuevamente
 
         nombre_archivo = "quiniela_tradicional.txt" ##se almacena el nombre del fichero donde se almacenan las apuestas del quini 6
-    
-        obtener_ganadores = comprobar_apuesta(numero_ganador, cargar(nombre_archivo)) #se llama a la funcion "comprobar_apuesta" y se le pasa como parametro el numero ganador y la funcion "cargar()" junto con el nombre del archivo indicado para obtener las apuestas del quini 6 almacenadas en el fichero "quiniela_tradicional". El resultado de llamar a la funcion "comprobar_apuesta" se almacena en una lista "obtener_ganadores" que poseera la/las apuesta/as ganadora/as. 
 
-        if not obtener_ganadores: #si no se encontraron apuestas ganadoras, es decir que "obtener_ganadores" esta vacio, se presenta el siguiente mensaje. 
-            print("No se encontro ningun ganador") 
-        else: #si se encontraron ganadores se itera en la lista "obtener_ganadores" y se muestra cada ganador en consola. 
-            print("El/los ganadores son:")
-            for ganador in obtener_ganadores:
-                print(ganador)
-         
+        try: 
+            obtener_ganadores = comprobar_apuesta(numero_ganador, cargar(nombre_archivo)) #se llama a la funcion "comprobar_apuesta" y se le pasa como parametro el numero ganador y la funcion "cargar()" junto con el nombre del archivo indicado para obtener las apuestas del quini 6 almacenadas en el fichero "quiniela_tradicional". El resultado de llamar a la funcion "comprobar_apuesta" se almacena en una lista "obtener_ganadores" que poseera la/las apuesta/as ganadora/as. 
+
+            if not obtener_ganadores: #si no se encontraron apuestas ganadoras, es decir que "obtener_ganadores" esta vacio, se presenta el siguiente mensaje. 
+                print("No se encontro ningun ganador") 
+            else: #si se encontraron ganadores se itera en la lista "obtener_ganadores" y se muestra cada ganador en consola. 
+                print("El/los ganadores son:")
+                for ganador in obtener_ganadores:
+                    print(f"Fecha y hora: {ganador['fecha_hora']}, Comprobante: {ganador['numero_comprobante']}, DNI: {ganador['dni']}, Cifra apostada: ${ganador['cantidad_dinero']}, Numero apostado: {ganador['numero_apostado']}")
+        except FileNotFoundError: 
+            print("No se han encontrado apuestas")
 #Esta funcion se encarga de calcular de ambas quinielas la cantidad de total de dinero recaudado, la retencion y ganancia neta. 
 def arqueo_caja():
     print("Has seleccionado la opcion 'ARQUEO DE CAJA'")
@@ -207,7 +211,7 @@ def arqueo_caja():
 
         total= (total_quiniela + total_quini) #se suma el total del dinero de ambas quinielas 
 
-        retencion = 0.47 * total #calcula la retencion 
+        retencion = round(0.47 * total, 2) #calcula la retencion y la redondea 
         ganancia_neta = total - retencion #calcula la ganancia neta
 
         #Se muestran los calculos en consola
