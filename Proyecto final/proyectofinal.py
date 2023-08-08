@@ -191,6 +191,7 @@ def comprobar_ganador():
         except FileNotFoundError: 
             print("No se han encontrado apuestas")
 #Esta funcion se encarga de calcular de ambas quinielas la cantidad de total de dinero recaudado, la retencion y ganancia neta. 
+
 def arqueo_caja():
     print("Has seleccionado la opcion 'ARQUEO DE CAJA'")
 
