@@ -87,7 +87,7 @@ def quiniela():
     
     crear_ticket(dni, dinero_apostado, fecha_hora, numero_comprobante, numero_apuesta) #se llama a la funcion "crear_ticket" para crear el ticket con la informacion de la apuesta y mostrarlo en consola. 
 
-##Esta funcion se encarga de tomar apuestas del quini 6, almacenarlas en un fichero y mostrar un ticket en consola con los detalles de la apuesta. 
+#Esta funcion se encarga de tomar apuestas del quini 6, almacenarlas en un fichero y mostrar un ticket en consola con los detalles de la apuesta. 
 def quiniela_tradicional(): 
     print("Has seleccionado la opcion 'QUINI 6'")
 
@@ -177,7 +177,7 @@ def comprobar_ganador():
             print("El numero ganador ingresado no es valido") #se muestra un mensaje de numero no valido
             numero_ganador = int(int(input("Ingrese nuevamente el numero ganador: "))) #se pide al usuario que ingrese un numero nuevamente
 
-        nombre_archivo = "quiniela_tradicional.txt" ##se almacena el nombre del fichero donde se almacenan las apuestas del quini 6
+        nombre_archivo = "quiniela_tradicional.txt" #se almacena el nombre del fichero donde se almacenan las apuestas del quini 6
 
         try: 
             obtener_ganadores = comprobar_apuesta(numero_ganador, cargar(nombre_archivo)) #se llama a la funcion "comprobar_apuesta" y se le pasa como parametro el numero ganador y la funcion "cargar()" junto con el nombre del archivo indicado para obtener las apuestas del quini 6 almacenadas en el fichero "quiniela_tradicional". El resultado de llamar a la funcion "comprobar_apuesta" se almacena en una lista "obtener_ganadores" que poseera la/las apuesta/as ganadora/as. 
@@ -190,8 +190,8 @@ def comprobar_ganador():
                     print(f"Fecha y hora: {ganador['fecha_hora']}, Comprobante: {ganador['numero_comprobante']}, DNI: {ganador['dni']}, Cifra apostada: ${ganador['cantidad_dinero']}, Numero apostado: {ganador['numero_apostado']}")
         except FileNotFoundError: 
             print("No se han encontrado apuestas")
-#Esta funcion se encarga de calcular de ambas quinielas la cantidad de total de dinero recaudado, la retencion y ganancia neta. 
 
+#Esta funcion se encarga de calcular de ambas quinielas la cantidad de total de dinero recaudado, la retencion y ganancia neta. 
 def arqueo_caja():
     print("Has seleccionado la opcion 'ARQUEO DE CAJA'")
 
